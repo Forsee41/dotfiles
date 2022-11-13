@@ -1,0 +1,98 @@
+######################    General    ######################
+
+super + Escape
+	pkill -USR1 -x sxhkd
+
+super + Return
+	alacritty
+
+super + p 
+	polybar-msg cmd toggle
+
+super + s
+	flameshot screen -c
+
+super + y 
+	flameshot gui -c
+
+Print
+	flameshot screen -c
+
+super + n
+	nemo
+
+
+########################    i3    #########################
+
+super + q
+	i3-msg kill
+
+super + {1-9,0}
+	i3-msg workspace {1-9,10}
+
+super + shift + {1-9,0}
+	i3-msg move container to workspace number {1-9,10}
+
+super + {h,j,k,l}
+	i3-msg focus {left,down,up,right}
+
+super + shift + {h,j,k,l}
+	i3-msg move {left,down,up,right}
+
+super + {semicolon, v}
+	i3-msg split {h, v}
+
+super + shift + f
+	i3-msg fullscreen toggle
+
+super + i
+	i3-msg layout toggle split
+
+super + shift + space
+	i3-msg floating toggle
+
+super + space
+	i3-msg focus mode_toggle
+
+super + shift + c
+	i3-msg reload
+
+super + shift + r
+	i3-msg restart; pgrep xborders | xargs kill; ~/.config/i3/xborder/xborders -c ~/.config/i3/xborder/example_config.json
+
+super + shift + e
+	i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'
+
+super + ctrl + {h,j,k,l}
+    i3-msg resize {grow width 1 px or 1 ppt, shrink height 1 px or 1 ppt, grow height 1 px or 1 ppt, shrink width 1 px or 1 ppt}
+
+
+
+
+#######################    Rofi    #########################
+
+super + t 
+	~/repos/rofi-translate/rofi_trans
+
+super + z
+	~/.scripts/shell/zathhist
+
+super + d
+	rofi -modi drun -show drun
+
+super + c
+	rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip"
+
+super + shift + d
+	rofi -show drun -run-command 'sudo {cmd}'
+
+super + e
+	rofi -modi emoji -show emoji
+
+super + w
+	rofi -modi window -show window
+
+super + u
+	rofi -modi run -show run
+
+

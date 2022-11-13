@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# A script for quick config files access. Takes 1st argument as a config shortcut,
+# 2nd (optional) argument as an editor (or any binary to be used on the config file).
+# If no 2nd argument passed, uses default_editor, or $EDITOR, if latter is set, instead.
+
+default_editor="nvim"
+case $EDITOR in '');; *) default_editor=$EDITOR;; esac 
+case $2 in 
+  '') editor=$default_editor;; 
+  *) editor=$2;; esac
+	
+case $1 in 
+	'') echo "Config shortcut required";;
+	'zsh') 
+	  case $3 in
+		'') editor=$default_editor;; 
+		*) editor=$3;;
+	  esac
+	  case $2 in 
+		'zshrc') exec $editor $HOME/.zshrc;;
+		'show') ls $HOME/.config/zshrc;;
+		'') exec $editor $home/.config/zshrc;;
+		*)
+		  target_config_file=$HOME/.config/zshrc/$2.sh
+		  if [[ -f $target_config_file ]]; then
+			exec $editor $target_config_file
+		  else
+			echo "Config category $2 is not found"
+		  fi;;
+	  esac;;
+	'zprof') exec $editor $HOME/.zprofile;;
+	'zath'|'zathura'|'zathurarc') exec $editor $HOME/.config/zathura/zathurarc;;
+	'ala') exec $editor $HOME/.alacritty.yml;;
+	'rofi') exec $editor $HOME/.config/rofi/config.rasi;;
+	'rofid') exec $editor $HOME/.config/rofi/;;
+	'zshrc') exec $editor $HOME/.zshrc;;
+	'i3') exec $editor $HOME/.config/i3/config;;
+	'xinit') exec $editor $HOME/.xinitrc;;
+	'dmrc'|'dm') exec $editor $HOME/.dmrc;;
+	'bash') exec $editor $HOME/.bashrc;;
+	'vim') exec $editor $HOME/.vimrc;;
+	'sxhkd'|'xshkd'|'keys'|'keybindings') exec $editor $HOME/.config/sxhkd/sxhkdrc;;
+	'picom') exec $editor $HOME/.config/picom/picom.conf;;
+	'polybar'|'bar') exec $editor $HOME/.config/polybar/config.ini;;
+	'qtile') exec $editor $HOME/.config/qtile/config.py;;
+	'cfg'|'con') exec $editor $HOME/.scripts/shell/cfg_shortcuts;;
+	'nvim') 
+	  case $3 in
+		'') editor=$default_editor;; 
+		*) editor=$3;;
+	  esac
+	  case $2 in 
+		'init') exec $editor $HOME/.config/nvim/init.lua;;
+		'show') ls $HOME/.config/nvim/lua/user;;
+		'lsp') exec $editor $HOME/.config/nvim/lua/user/lsp;;
+		'') exec $editor $home/.config/nvim;;
+		*)
+		  target_config_file=$HOME/.config/nvim/lua/user/$2.lua
+		  if [[ -f $target_config_file ]]; then
+			exec $editor $target_config_file
+		  else
+			echo "Config category $2 is not found"
+		  fi;;
+	  esac;;
+	*) echo "Config shortcut not found";;
+esac
+

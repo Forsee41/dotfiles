@@ -1,0 +1,6 @@
+set smooth-scroll true
+map k navigate previous
+map j navigate next
+map u scroll up 
+map d scroll down 
+
