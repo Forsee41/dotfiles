@@ -26,6 +26,7 @@ Used soft:
 
 
 Don't move remaining keybindings from i3 config to the sxhkdrc, it will break i3 
+
 Don't move ssh-agent startup to .zprofile cause reasons
 
 Nvim config is based off of [chris@machine](https://github.com/LunarVim/Neovim-from-scratch) dotfiles
