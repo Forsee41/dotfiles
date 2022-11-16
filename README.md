@@ -5,7 +5,7 @@
 ![workspace screen](screens/workspace.png)
 
 
-Use GNU stow to make the symlinks
+Use GNU stow to make symlinks
 
 Used soft:
 
@@ -19,6 +19,8 @@ Used soft:
 - picom
 - alacritty
 - zsh (it uses oh-my-zsh just for the prompt, you can remove it)
+- flameshot
+- xsiv
 - python
 - node
 
