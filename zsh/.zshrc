@@ -6,3 +6,7 @@ FILES=($(echo $FILES_STR | tr '\n' ' '))
 for FILE in $FILES; do
      source $FILE
 done
+[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+
+plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-syntax-highlighting"
