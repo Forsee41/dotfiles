@@ -59,6 +59,7 @@ return packer.startup(function(use)
   use { "preservim/nerdtree" }
   use { "psliwka/vim-smoothie"}
   use { "christoomey/vim-system-copy"}
+  use { "iamcco/markdown-preview.nvim"}
 
 	-- Colorschemes
   use { "folke/tokyonight.nvim", commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764" }
