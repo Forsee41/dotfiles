@@ -1,68 +1,102 @@
 #!/bin/bash
 
-# A script for quick config files access. Takes 1st argument as a config shortcut,
-# 2nd (optional) argument as an editor (or any binary to be used on the config file).
-# If no 2nd argument passed, uses default_editor, or $EDITOR, if latter is set, instead.
+HELP_MESSAGE="
+A script for a quick config files access. Takes 1st argument as a config shortcut,
+2nd (optional) argument as a config subcategory
+Uses your \$EDITOR as an editor, or nvim if \$EDITOR is not set
 
-default_editor="nvim"
-case $EDITOR in '');; *) default_editor=$EDITOR;; esac 
-case $2 in 
-  '') editor=$default_editor;; 
-  *) editor=$2;; esac
+Possible flags:
+	-e  |  --executable			Specify executable, takes executable name as an argument
+ 	-s  |  --show				Show filepath, instead of opening it
+ 	-h  |  --help				Show help message
+"
+
+DEFAULT_EDITOR="nvim"
+if [[ ! -z $EDITOR ]]; then EXECUTABLE=$EDITOR; else EXECUTABLE=$DEFAULT_EDITOR; fi
+
+CONFIG_CATEGORY=''
+CONFIG_SUBCATEGORY=''
+SHOW_FILEPATH=false
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+		'-e'|'--executable')
+			if [[ ! -z $2 ]]; then
+				EXECUTABLE=$2
+				shift
+				shift;
+			else 
+				echo "--executable flag requires an executable name argument"
+				exit 1;
+			fi;;
+		'-s'|'--show')
+			shift
+			SHOW_FILEPATH=true;;
+		'-h'|'--help')
+			shift
+			echo "$HELP_MESSAGE";;
+		*)
+			if [[ -z $CONFIG_CATEGORY ]]; then
+				CONFIG_CATEGORY=$1
+				shift;
+			elif [[ -z $CONFIG_SUBCATEGORY ]]; then
+				CONFIG_SUBCATEGORY=$1
+				shift;
+			else 
+				echo "Too many arguments!!!"
+				exit 1;
+			fi;;
+	esac
+done
 	
-case $1 in 
+case $CONFIG_CATEGORY in 
 	'') echo "Config shortcut required";;
 	'zsh') 
-	  case $3 in
-		'') editor=$default_editor;; 
-		*) editor=$3;;
-	  esac
-	  case $2 in 
-		'zshrc') exec $editor $HOME/.zshrc;;
+	  case $CONFIG_SUBCATEGORY in 
+		'zshrc') TARGET_FILE_PATH=$HOME/.zshrc;;
 		'show') ls $HOME/.config/zshrc;;
-		'') exec $editor $home/.config/zshrc;;
+		'') TARGET_FILE_PATH=$home/.config/zshrc;;
 		*)
-		  target_config_file=$HOME/.config/zshrc/$2.sh
-		  if [[ -f $target_config_file ]]; then
-			exec $editor $target_config_file
+		  INNER_CONFIG_FILENAME=$HOME/.config/zshrc/$CONFIG_SUBCATEGORY.sh
+		  echo $INNER_CONFIG_FILENAME
+		  if [[ -f $INNER_CONFIG_FILENAME ]]; then
+			TARGET_FILE_PATH=$INNER_CONFIG_FILENAME
 		  else
 			echo "Config category $2 is not found"
 		  fi;;
 	  esac;;
-	'zprof') exec $editor $HOME/.zprofile;;
-	'zath'|'zathura'|'zathurarc') exec $editor $HOME/.config/zathura/zathurarc;;
-	'ala') exec $editor $HOME/.alacritty.yml;;
-	'rofi') exec $editor $HOME/.config/rofi/config.rasi;;
-	'rofid') exec $editor $HOME/.config/rofi/;;
-	'zshrc') exec $editor $HOME/.zshrc;;
-	'i3') exec $editor $HOME/.config/i3/config;;
-	'xinit') exec $editor $HOME/.xinitrc;;
-	'dmrc'|'dm') exec $editor $HOME/.dmrc;;
-	'bash') exec $editor $HOME/.bashrc;;
-	'vim') exec $editor $HOME/.vimrc;;
-	'sxhkd'|'xshkd'|'keys'|'keybindings') exec $editor $HOME/.config/sxhkd/sxhkdrc;;
-	'picom') exec $editor $HOME/.config/picom/picom.conf;;
-	'polybar'|'bar') exec $editor $HOME/.config/polybar/config.ini;;
-	'qtile') exec $editor $HOME/.config/qtile/config.py;;
-	'cfg'|'con') exec $editor $HOME/.scripts/shell/cfg_shortcuts;;
+	'zprof') TARGET_FILE_PATH=$HOME/.zprofile;;
+	'zath'|'zathura'|'zathurarc') TARGET_FILE_PATH=$HOME/.config/zathura/zathurarc;;
+	'ala') TARGET_FILE_PATH=$HOME/.alacritty.yml;;
+	'rofi') TARGET_FILE_PATH=$HOME/.config/rofi/config.rasi;;
+	'rofid') TARGET_FILE_PATH=$HOME/.config/rofi/;;
+	'zshrc') TARGET_FILE_PATH=$HOME/.zshrc;;
+	'i3') TARGET_FILE_PATH=$HOME/.config/i3/config;;
+	'xinit') TARGET_FILE_PATH=$HOME/.xinitrc;;
+	'dmrc'|'dm') TARGET_FILE_PATH=$HOME/.dmrc;;
+	'bash') TARGET_FILE_PATH=$HOME/.bashrc;;
+	'vim') TARGET_FILE_PATH=$HOME/.vimrc;;
+	'sxhkd'|'xshkd'|'keys'|'keybindings') TARGET_FILE_PATH=$HOME/.config/sxhkd/sxhkdrc;;
+	'picom') TARGET_FILE_PATH=$HOME/.config/picom/picom.conf;;
+	'polybar'|'bar') TARGET_FILE_PATH=$HOME/.config/polybar/config.ini;;
+	'qtile') TARGET_FILE_PATH=$HOME/.config/qtile/config.py;;
+	'cfg'|'con') TARGET_FILE_PATH=$HOME/.scripts/shell/cfg_shortcuts;;
 	'nvim') 
-	  case $3 in
-		'') editor=$default_editor;; 
-		*) editor=$3;;
-	  esac
-	  case $2 in 
-		'init') exec $editor $HOME/.config/nvim/init.lua;;
+		case $CONFIG_SUBCATEGORY in 
+		'init'|'') TARGET_FILE_PATH=$HOME/.config/nvim/init.lua;;
 		'show') ls $HOME/.config/nvim/lua/user;;
-		'lsp') exec $editor $HOME/.config/nvim/lua/user/lsp;;
-		'') exec $editor $home/.config/nvim;;
+		'lsp') TARGET_FILE_PATH=$HOME/.config/nvim/lua/user/lsp;;
 		*)
-		  target_config_file=$HOME/.config/nvim/lua/user/$2.lua
-		  if [[ -f $target_config_file ]]; then
-			exec $editor $target_config_file
+		  INNER_CONFIG_FILENAME=$HOME/.config/nvim/lua/user/$CONFIG_SUBCATEGORY.lua
+		  if [[ -f $INNER_CONFIG_FILENAME ]]; then
+			TARGET_FILE_PATH=$INNER_CONFIG_FILENAME
 		  else
-			echo "Config category $2 is not found"
+			echo "Config category $CONFIG_SUBCATEGORY is not found"
 		  fi;;
-	  esac;;
+		esac;;
 	*) echo "Config shortcut not found";;
 esac
+
+if [[ $SHOW_FILEPATH == true ]]; then echo "$TARGET_FILE_PATH"; exit 0; fi
+if [[ ! -z $TARGET_FILE_PATH ]]; then exec $EXECUTABLE $TARGET_FILE_PATH; fi
 
