@@ -25,4 +25,11 @@ alias lag='exa -la --git-ignore --git --sort=size --reverse'
 alias activate='source env/bin/actiavte'
 alias deac='deactivate'
 
+# Cd aliases
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
 
