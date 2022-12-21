@@ -41,6 +41,20 @@ bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 bindsym mod1+Tab workspace back_and_forth
 
+# Bind workspaces to monitors
+set $monitor_one DP-1
+set $monitor_two HDMI-3
+workspace 1 output $monitor_one
+workspace 2 output $monitor_one
+workspace 3 output $monitor_one
+workspace 4 output $monitor_one
+workspace 5 output $monitor_one
+workspace 6 output $monitor_one
+workspace 7 output $monitor_one
+workspace 8 output $monitor_one
+workspace 9 output $monitor_two
+workspace 10 output $monitor_two
+
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3

@@ -23,6 +23,7 @@ alias lag='exa -la --git-ignore --git --sort=size --reverse'
 # Venv aliases
 
 alias activate='source env/bin/actiavte'
+alias poet='poetry shell'
 alias deac='deactivate'
 
 # Cd aliases
@@ -31,5 +32,9 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+
+alias mm='cd ~/dev/bl-matchmaker/'
+alias mmbot='cd ~/dev/mmbot/'
+alias test='cd ~/test/'
 
 

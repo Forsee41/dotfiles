@@ -61,6 +61,8 @@ return packer.startup(function(use)
 	use({ "christoomey/vim-system-copy" })
 	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 	use({ "dhruvasagar/vim-open-url" })
+	use({ "turbio/bracey.vim" })
+	use({ "neovim/pynvim" })
 
 	-- Colorschemes
 	use({ "folke/tokyonight.nvim", commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764" })

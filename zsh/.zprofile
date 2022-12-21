@@ -1,5 +1,7 @@
 SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 PATH=$PATH:~/bin
+PATH=$PATH:~/repos/zulu8.66.0.15-ca-jre8.0.352-linux_x64/bin/
+PATH=$PATH:~/.local/bin
 
 # SSH agent init
 SSH_ENV="$HOME/.ssh/agent-environment"
