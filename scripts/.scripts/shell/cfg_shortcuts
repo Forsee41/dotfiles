@@ -9,6 +9,7 @@ Possible flags:
 	-e  |  --executable			Specify executable, takes executable name as an argument
  	-s  |  --show				Show filepath, instead of opening it
  	-h  |  --help				Show help message
+	-c  |  --cd 				Run a command from file's dir
 "
 
 DEFAULT_EDITOR="nvim"
@@ -17,6 +18,8 @@ if [[ ! -z $EDITOR ]]; then EXECUTABLE=$EDITOR; else EXECUTABLE=$DEFAULT_EDITOR;
 CONFIG_CATEGORY=''
 CONFIG_SUBCATEGORY=''
 SHOW_FILEPATH=false
+RUN_FROM_FILES_DIR=false
+DIRNAME=false
 
 while [[ $# -gt 0 ]]; do
 	case $1 in
@@ -32,6 +35,9 @@ while [[ $# -gt 0 ]]; do
 		'-s'|'--show')
 			shift
 			SHOW_FILEPATH=true;;
+		'-c'|'--cd')
+			shift
+			RUN_FROM_FILES_DIR=true;;
 		'-h'|'--help')
 			shift
 			echo "$HELP_MESSAGE";;
@@ -85,7 +91,7 @@ case $CONFIG_CATEGORY in
 		case $CONFIG_SUBCATEGORY in 
 		'init'|'') TARGET_FILE_PATH=$HOME/.config/nvim/init.lua;;
 		'show') ls $HOME/.config/nvim/lua/user;;
-		'lsp') TARGET_FILE_PATH=$HOME/.config/nvim/lua/user/lsp;;
+		'lsp') TARGET_FILE_PATH=$HOME/.config/nvim/lua/user/lsp/init.lua;DIRNAME=$HOME/.config/nvim/lua/user/lsp;;
 		*)
 		  INNER_CONFIG_FILENAME=$HOME/.config/nvim/lua/user/$CONFIG_SUBCATEGORY.lua
 		  if [[ -f $INNER_CONFIG_FILENAME ]]; then
@@ -97,6 +103,11 @@ case $CONFIG_CATEGORY in
 	*) echo "Config shortcut not found";;
 esac
 
-if [[ $SHOW_FILEPATH == true ]]; then echo "$TARGET_FILE_PATH"; exit 0; fi
-if [[ ! -z $TARGET_FILE_PATH ]]; then exec $EXECUTABLE $TARGET_FILE_PATH; fi
+if [[ $SHOW_FILEPATH == true ]]; 
+	then echo "$TARGET_FILE_PATH"; exit 0;
+elif [[ ! -z $TARGET_FILE_PATH && $RUN_FROM_FILES_DIR == true ]]; 
+	if [[ $DIRNAME == false ]]; then DIRNAME=$(dirname $TARGET_FILE_PATH);fi;
+	then (cd $DIRNAME && exec $EXECUTABLE $TARGET_FILE_PATH);
+elif [[ ! -z $TARGET_FILE_PATH ]]; 
+	then exec $EXECUTABLE $TARGET_FILE_PATH; fi
 

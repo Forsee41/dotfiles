@@ -63,6 +63,10 @@ return packer.startup(function(use)
 	use({ "dhruvasagar/vim-open-url" })
 	use({ "turbio/bracey.vim" })
 	use({ "neovim/pynvim" })
+	use({ "ThePrimeagen/harpoon" })
+	use({ "mfussenegger/nvim-dap" })
+	use({ "mfussenegger/nvim-dap-python" })
+	use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
 	-- Colorschemes
 	use({ "folke/tokyonight.nvim", commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764" })

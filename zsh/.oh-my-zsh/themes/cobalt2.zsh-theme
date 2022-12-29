@@ -80,6 +80,13 @@ prompt_dir() {
 # - was there an error
 # - am I root
 # - are there background jobs?
+prompt_virtualenv() {
+  if [[ -n "$VIRTUAL_ENV" && -n "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
+		if [[ "$POETRY_ACTIVE" == 1 ]]; then 
+    prompt_segment green black "(${${${VIRTUAL_ENV:t:gs/%/%%}%-*}%-*})";
+		else prompt_segment green black "(${VIRTUAL_ENV:t:gs/%/%%})"; fi
+  fi
+}
 prompt_status() {
   local symbols
   symbols=()
@@ -94,7 +101,8 @@ prompt_status() {
 build_prompt() {
   RETVAL=$?
   prompt_status
-  prompt_context
+  # prompt_context
+	prompt_virtualenv
   prompt_dir
   prompt_git
   prompt_end

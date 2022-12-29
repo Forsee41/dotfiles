@@ -23,7 +23,7 @@ alias lag='exa -la --git-ignore --git --sort=size --reverse'
 # Venv aliases
 
 alias activate='source env/bin/actiavte'
-alias poet='poetry shell'
+alias poet='poetry shell -q'
 alias deac='deactivate'
 
 # Cd aliases

@@ -20,7 +20,7 @@ vim.g.maplocalleader = " "
 
 -- Normal --
 -- Visual components toggle
-keymap("n", "<leader>w", ":set colorcolumn=88<CR>", opts)
+keymap("n", "<leader>lw", ":set colorcolumn=88<CR>", opts)
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -36,13 +36,26 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Navigate buffers
+-- Manage buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<leader>c", ":wa|%bd|e#|bd#|NvimTreeToggle<CR>", opts) -- Save all buffers and close all but current
+keymap("n", "<leader>w", ":wa<CR>", opts) -- Save all buffers
 
 -- Move text up and down
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+
+-- Harpoon file navigation
+keymap("n", "<leader>a", ":lua require('harpoon.mark').add_file()<CR>", opts)
+keymap("n", "<leader>h", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
+keymap("n", "<leader>n", ":lua require('harpoon.ui').nav_next()<CR>", opts)
+keymap("n", "<leader>p", ":lua require('harpoon.ui').nav_prev()<CR>", opts)
+keymap("n", "<leader>1", ":lua require('harpoon.ui').nav_file(1)<CR>", opts)
+keymap("n", "<leader>2", ":lua require('harpoon.ui').nav_file(2)<CR>", opts)
+keymap("n", "<leader>3", ":lua require('harpoon.ui').nav_file(3)<CR>", opts)
+keymap("n", "<leader>4", ":lua require('harpoon.ui').nav_file(4)<CR>", opts)
+
 
 -- Insert --
 -- Press jk fast to exit insert mode 
@@ -67,7 +80,6 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Nvim Tree --
-keymap("n", "<leader>n", ":NERDTreeFocus<CR>", opts)
 keymap("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope --
