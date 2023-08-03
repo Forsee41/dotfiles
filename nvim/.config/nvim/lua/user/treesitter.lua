@@ -8,10 +8,19 @@ configs.setup({
 	ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
 	highlight = {
 		enable = true, -- false will disable the whole extension
-		disable = { "css" }, -- list of language that will be disabled
+		disable = { "css", "latex", "tex" }, -- list of language that will be disabled
 	},
 	autopairs = {
 		enable = true,
 	},
 	indent = { enable = true, disable = { "python", "css" } },
+	rainbow = {
+		enable = true,
+		-- list of languages you want to disable the plugin for
+		disable = { "jsx", "cpp" },
+		-- Which query to use for finding delimiters
+		query = "rainbow-parens",
+		-- Highlight the entire buffer all at once
+		strategy = require("ts-rainbow").strategy.global,
+	},
 })

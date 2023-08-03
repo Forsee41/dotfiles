@@ -1,4 +1,4 @@
-set -o vi
+# set -o vi
 
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit

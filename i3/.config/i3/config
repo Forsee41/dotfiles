@@ -22,10 +22,22 @@ hide_edge_borders smart
 
 # Default layout
 exec --no-startup-id i3-msg 'workspace 2; workspace 9; workspace 1; sleep 2'
-exec --no-startup-id i3-msg 'workspace 2; exec brave; sleep 2'
+exec --no-startup-id i3-msg 'exec discord; sleep 5'
+exec --no-startup-id i3-msg 'workspace 2; exec brave; sleep 4'
+
+assign [class="Firefox"] $ws2
+assign [class="Chromium"] $ws2
+assign [class="Brave"] $ws2
+assign [class="discord"] $ws5
+assign [class="Minecraft"] $ws4
+assign [class="Google-chrome-beta"] $ws2
+assign [class="^Geany"] $ws1
+
+for_window [class="Crow Translate"] floating enable, resize set 1200 900 ,move position center
 
 # Daemons startup
 exec --no-startup-id openrazer-daemon -r
+exec --no-startup-id crow
 exec_always  sxhkd
 
 # Set gaps
@@ -79,7 +91,7 @@ floating_modifier $mod
 
 # Layouts shortcuts
 bindsym $mod+Shift+s layout default
-bindsym $mod+Shift+t layout tabbed
+bindsym $mod+Shift+y layout tabbed
 # bindsym $mod+Shift+s layout toggle split
 
 # Define names for default workspaces for which we configure key bindings later on.

@@ -3,6 +3,7 @@ alias con='cfg_shortcuts'
 alias screens="sxiv ~/Pictures/ScreenShots/* 2>/dev/null | echo 'No screens in a ScreenShots folder!'"
 alias wallpapers='sxiv ~/Pictures/wallpapers/*'
 alias view='sxiv'
+alias zath='zathura'
 
 # List directory aliases
 alias ll='exa'
@@ -22,7 +23,7 @@ alias lag='exa -la --git-ignore --git --sort=size --reverse'
 
 # Venv aliases
 
-alias activate='source env/bin/actiavte'
+alias activate='source env/bin/activate'
 alias poet='poetry shell -q'
 alias deac='deactivate'
 
@@ -35,6 +36,14 @@ alias .....='cd ../../../..'
 
 alias mm='cd ~/dev/bl-matchmaker/'
 alias mmbot='cd ~/dev/mmbot/'
+alias btb='cd ~/dev/band-tracker/'
+alias icalc='cd ~/dev/dataproc/'
 alias test='cd ~/test/'
+alias books='cd ~/Desktop/books'
+alias notes='cd ~/Desktop/notes'
+alias videos='cd ~/Desktop/videos'
+alias math='cd ~/Desktop/notes/math'
+alias testrust='cd ~/test/rust'
+
 
 

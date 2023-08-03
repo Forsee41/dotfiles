@@ -1,9 +1,10 @@
 return {
-  settings = {
-    python = {
-      analysis = {
-        typeCheckingMode = "basic",
-      },
-    },
-  },
+	settings = {
+		python = {
+			analysis = {
+				typeCheckingMode = "basic",
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
 }

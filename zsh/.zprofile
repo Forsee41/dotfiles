@@ -2,6 +2,7 @@ SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 PATH=$PATH:~/bin
 PATH=$PATH:~/repos/zulu8.66.0.15-ca-jre8.0.352-linux_x64/bin/
 PATH=$PATH:~/.local/bin
+export QT_QPA_PLATFORMTHEME=qt5ct
 
 # SSH agent init
 SSH_ENV="$HOME/.ssh/agent-environment"
@@ -26,4 +27,4 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
-ssh-add /home/forsee/.ssh/github >/dev/null
+ssh-add /home/forsee/.ssh/github > /dev/null 2>&1

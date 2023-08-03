@@ -61,7 +61,7 @@ case $CONFIG_CATEGORY in
 	  case $CONFIG_SUBCATEGORY in 
 		'zshrc') TARGET_FILE_PATH=$HOME/.zshrc;;
 		'show') ls $HOME/.config/zshrc;;
-		'') TARGET_FILE_PATH=$home/.config/zshrc;;
+		'') TARGET_FILE_PATH=$HOME/.config/zshrc;;
 		*)
 		  INNER_CONFIG_FILENAME=$HOME/.config/zshrc/$CONFIG_SUBCATEGORY.sh
 		  echo $INNER_CONFIG_FILENAME

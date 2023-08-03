@@ -1,4 +1,5 @@
 # Load the 'init.sh'.
+DISABLE_AUTO_UPDATE=true
 source ~/.config/zshrc/shell.sh
 FILES_STR=$(find ~/.config/zshrc -name '*.sh' -not -name 'shell.sh')
 # # Outer () will convert the output of $() to array.
