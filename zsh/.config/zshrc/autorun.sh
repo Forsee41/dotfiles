@@ -1,1 +1,1 @@
-tmux
+source ~/.scripts/shell/tmux-start
