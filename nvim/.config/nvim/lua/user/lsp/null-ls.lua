@@ -18,6 +18,6 @@ null_ls.setup({
 			prefer_local = ".venv/bin",
 			extra_args = { "--max-line-length", "88", "--ignore", "E203, W503, ANN101" },
 		}),
-		-- diagnostics.mypy
+		diagnostics.mypy
 	},
 })

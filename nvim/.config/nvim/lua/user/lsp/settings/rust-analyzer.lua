@@ -7,6 +7,9 @@ return {
 				},
 				prefix = "self",
 			},
+			checkOnSave = {
+				command = "clippy",
+			},
 			cargo = {
 				buildScripts = {
 					enable = true,
