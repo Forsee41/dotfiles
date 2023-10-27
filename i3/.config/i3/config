@@ -33,7 +33,7 @@ assign [class="Minecraft"] $ws4
 assign [class="Google-chrome-beta"] $ws2
 assign [class="^Geany"] $ws1
 
-for_window [class="Crow Translate"] floating enable, resize set 1200 900 ,move position center
+for_window [class="crow-translate"] floating enable, resize set 1200 900 ,move position center
 
 # Daemons startup
 exec --no-startup-id openrazer-daemon -r
