@@ -17,7 +17,7 @@ configs.setup({
 	rainbow = {
 		enable = true,
 		-- list of languages you want to disable the plugin for
-		disable = { "jsx", "cpp" },
+		disable = { "jsx", "cpp", "vue" },
 		-- Which query to use for finding delimiters
 		query = "rainbow-parens",
 		-- Highlight the entire buffer all at once
