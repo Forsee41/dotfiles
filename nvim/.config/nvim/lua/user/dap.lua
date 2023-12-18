@@ -1,40 +1,43 @@
-local pythonpath = function()
-	local venv_path = os.getenv("VIRTUAL_ENV")
-	if venv_path then
-		return venv_path .. "/bin/python"
-	else
-		return "/usr/bin/python"
-	end
-end
-require("dap-python").setup(pythonpath())
-
-require("dap-python").test_runner = "pytest"
-
--- require("dap").adapters.python = {
---
--- 	type = "executable",
--- 	command = "python",
--- 	args = { "-m", "debugpy.adapter" },
--- 	cwd = "${workspaceFolder}",
--- 	env = { { "PYTHONPATH", "${workspaceFolder}/src" } },
--- }
--- require("dap").configurations.python = {
+-- dap setup
+local dap = require("dap")
+dap.adapters.python = {
+	type = "executable",
+	command = "python",
+	args = { "-m", "debugpy.adapter" },
+	cwd = "${workspaceFolder}",
+	env = { { PYTHONPATH = "${workspaceFolder}" } },
+}
+dap.configurations.python = {
+	{
+		type = "python",
+		request = "launch",
+		name = "Launch pytest debug1",
+		module = "pytest",
+		args = {"--asyncio-mode=auto", "${file}" },
+		pythonPath = "python",
+		env = {
+			PYTHONPATH = "${workspaceFolder}",
+		},
+	},
+}
+-- local to_pass = {
 -- 	{
 -- 		type = "python",
 -- 		request = "launch",
--- 		name = "Launch file",
--- 		program = "${file}",
--- 		pythonPath = function()
--- 			local venv_path = os.getenv("VIRTUAL_ENV")
--- 			return venv_path .. "/bin/python"
--- 		end,
+-- 		name = "Launch pytest debug",
+-- 		program = "./tests",
+-- 		pythonPath = "python",
+-- 		-- cwd = "${workspaceFolder}",
+-- 		env = {
+-- 			PYTHONPATH = "${workspaceFolder}",
+-- 		},
 -- 	},
 -- }
 
+-- dapui setup
 require("dapui").setup({
 	icons = { expanded = "", collapsed = "", current_frame = "" },
 	mappings = {
-		-- Use a table to apply multiple mappings
 		expand = { "<CR>", "<2-LeftMouse>" },
 		open = "o",
 		remove = "d",
@@ -42,34 +45,17 @@ require("dapui").setup({
 		repl = "r",
 		toggle = "t",
 	},
-	-- Use this to override mappings for specific elements
-	element_mappings = {
-		-- Example:
-		-- stacks = {
-		--   open = "<CR>",
-		--   expand = "o",
-		-- }
-	},
-	-- Expand lines larger than the window
-	-- Requires >= 0.7
+	element_mappings = {},
 	expand_lines = vim.fn.has("nvim-0.7") == 1,
-	-- Layouts define sections of the screen to place windows.
-	-- The position can be "left", "right", "top" or "bottom".
-	-- The size specifies the height/width depending on position. It can be an Int
-	-- or a Float. Integer specifies height/width directly (i.e. 20 lines/columns) while
-	-- Float value specifies percentage (i.e. 0.3 - 30% of available lines/columns)
-	-- Elements are the elements shown in the layout (in order).
-	-- Layouts are opened in order so that earlier layouts take priority in window sizing.
 	layouts = {
 		{
 			elements = {
-				-- Elements can be strings or table with id and size keys.
 				{ id = "scopes", size = 0.25 },
 				"breakpoints",
 				"stacks",
 				"watches",
 			},
-			size = 40, -- 40 columns
+			size = 40,
 			position = "left",
 		},
 		{
@@ -77,14 +63,12 @@ require("dapui").setup({
 				"repl",
 				"console",
 			},
-			size = 0.25, -- 25% of total lines
+			size = 0.25,
 			position = "bottom",
 		},
 	},
 	controls = {
-		-- Requires Neovim nightly (or 0.8 when released)
 		enabled = true,
-		-- Display controls in this element
 		element = "repl",
 		icons = {
 			pause = "",
@@ -98,21 +82,21 @@ require("dapui").setup({
 		},
 	},
 	floating = {
-		max_height = nil, -- These can be integers or a float between 0 and 1.
-		max_width = nil, -- Floats will be treated as percentage of your screen.
-		border = "single", -- Border style. Can be "single", "double" or "rounded"
+		max_height = nil,
+		max_width = nil,
+		border = "single",
 		mappings = {
 			close = { "q", "<Esc>" },
 		},
 	},
 	windows = { indent = 1 },
 	render = {
-		max_type_length = nil, -- Can be integer or nil.
-		max_value_lines = 100, -- Can be integer or nil.
+		max_type_length = nil,
+		max_value_lines = 100,
 	},
 })
 
-local dap, dapui = require("dap"), require("dapui")
+local dapui = require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
 end
@@ -122,6 +106,22 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
 end
+
+local pythonpath = function()
+	local venv_path = os.getenv("VIRTUAL_ENV")
+	if venv_path then
+		return venv_path .. "/bin/python"
+	else
+		return "/usr/bin/python"
+	end
+end
+local dap_python = require("dap-python")
+dap_python.setup(pythonpath(), { include_configs = to_pass })
+dap_python.test_runner = "pytest"
+dap_python.resolve_python = pythonpath
+-- dap_python.DebugpyLaunchConfig.env = { PYTHONPATH = "${workspaceFolder}" }
+--
+
 vim.keymap.set("n", "<F5>", ":lua require'dap'.continue()<CR>")
 vim.keymap.set("n", "<F1>", ":lua require'dap'.step_into()<CR>")
 vim.keymap.set("n", "<F2>", ":lua require'dap'.step_over()<CR>")

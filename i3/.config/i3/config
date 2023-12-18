@@ -23,9 +23,11 @@ hide_edge_borders smart
 # Default layout
 exec --no-startup-id i3-msg 'workspace 2; workspace 9; workspace 1; sleep 2'
 exec --no-startup-id i3-msg 'exec ~/bin/Discord; sleep 5'
+exec --no-startup-id i3-msg 'exec Telegram; sleep 5'
 exec --no-startup-id i3-msg 'workspace 2; exec brave; sleep 4'
 
 assign [class="Firefox"] $ws2
+assign [class="Telegram"] $ws6
 assign [class="Chromium"] $ws2
 assign [class="Brave"] $ws2
 assign [class="discord"] $ws5

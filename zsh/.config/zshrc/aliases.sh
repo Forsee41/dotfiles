@@ -4,6 +4,8 @@ alias screens="sxiv ~/Pictures/ScreenShots/* 2>/dev/null | echo 'No screens in a
 alias wallpapers='sxiv ~/Pictures/wallpapers/*'
 alias view='sxiv'
 alias zath='zathura'
+alias dk='docker'
+alias dkc='docker compose'
 
 # List directory aliases
 alias ll='exa'

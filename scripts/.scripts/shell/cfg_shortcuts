@@ -79,6 +79,7 @@ case $CONFIG_CATEGORY in
 	'zshrc') TARGET_FILE_PATH=$HOME/.zshrc;;
 	'i3') TARGET_FILE_PATH=$HOME/.config/i3/config;;
 	'xinit') TARGET_FILE_PATH=$HOME/.xinitrc;;
+	'tmux') TARGET_FILE_PATH=$HOME/.tmux.conf;;
 	'dmrc'|'dm') TARGET_FILE_PATH=$HOME/.dmrc;;
 	'bash') TARGET_FILE_PATH=$HOME/.bashrc;;
 	'vim') TARGET_FILE_PATH=$HOME/.vimrc;;
@@ -91,7 +92,7 @@ case $CONFIG_CATEGORY in
 		case $CONFIG_SUBCATEGORY in 
 		'init'|'') TARGET_FILE_PATH=$HOME/.config/nvim/init.lua;;
 		'show') ls $HOME/.config/nvim/lua/user;;
-		'lsp') TARGET_FILE_PATH=$HOME/.config/nvim/lua/user/lsp/init.lua;DIRNAME=$HOME/.config/nvim/lua/user/lsp;;
+		'lsp') TARGET_FILE_PATH=$HOME/.config/nvim/lua/user/lsp/config.lua;DIRNAME=$HOME/.config/nvim/lua/user/lsp;;
 		*)
 		  INNER_CONFIG_FILENAME=$HOME/.config/nvim/lua/user/$CONFIG_SUBCATEGORY.lua
 		  if [[ -f $INNER_CONFIG_FILENAME ]]; then

@@ -37,8 +37,8 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Manage buffers
-keymap("n", "<leader>n", ":bnext<CR>", opts)
-keymap("n", "<leader>p", "<C-S-6>", opts)
+keymap("n", "<leader>n", ":BufSurfForward<CR>", opts)
+keymap("n", "<leader>p", "::BufSurfBack<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<leader>c", ":wa|%bd|e#|bd#|NvimTreeToggle<CR>", opts) -- Save all buffers and close all but current
 keymap("n", "<leader>w", ":wa<CR>", opts) -- Save all buffers
@@ -57,16 +57,15 @@ keymap("n", "<leader>d", ":lua require('harpoon.ui').nav_file(3)<CR>", opts)
 keymap("n", "<leader>s", ":lua require('harpoon.ui').nav_file(2)<CR>", opts)
 keymap("n", "<leader>f", ":lua require('harpoon.ui').nav_file(4)<CR>", opts)
 
-
 -- Insert --
--- Press jk fast to exit insert mode 
+-- Press jk fast to exit insert mode
 -- keymap("i", "jk", "<ESC>", opts)
 -- keymap("i", "kj", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
-keymap("v", "<", "<gv<CR><Esc>", opts)
-keymap("v", ">", ">gv<CR><Esc>", opts)
+-- keymap("v", "<", "<gv<CR><Esc>", opts)
+-- keymap("v", ">", ">gv<CR><Esc>", opts)
 
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
@@ -112,4 +111,3 @@ keymap("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-

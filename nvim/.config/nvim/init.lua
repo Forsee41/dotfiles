@@ -23,5 +23,6 @@ require "user.indentline"
 --require "user.autocommands"
 require "user.dap"
 require "user.rust-tools"
+require "user.noice"
 
 vim.cmd("set colorcolumn=88")
