@@ -6,6 +6,10 @@ alias view='sxiv'
 alias zath='zathura'
 alias dk='docker'
 alias dkc='docker compose'
+alias vg='valgrind'
+
+# Game shortcuts
+alias dwarf-fortress='cd "/mnt/windows/Users/forse/Desktop/Dwarf Fortress"; wine "Dwarf Fortress.exe"'
 
 # List directory aliases
 alias ll='exa'

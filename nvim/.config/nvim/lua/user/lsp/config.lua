@@ -91,6 +91,18 @@ lspconfig.volar.setup({
 	end,
 })
 
-lspconfig.clangd.setup({})
+lspconfig.clangd.setup({
+ settings = {
+   clangd = {
+     diagnostics = {
+       enable = true,
+       display = {
+         kind = "always",
+         severity = "warning",
+       },
+     },
+   },
+ },
+})
 
 lspconfig.emmet_ls.setup({})

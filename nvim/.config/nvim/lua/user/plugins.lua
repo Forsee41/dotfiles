@@ -133,6 +133,23 @@ return packer.startup(function(use)
 		},
 	})
 
+	-- AI
+	-- use({
+	-- 	"jackMort/ChatGPT.nvim",
+	-- 	config = function()
+	-- 		require("chatgpt").setup({
+	-- 			-- api_key_cmd = "pass show openai"
+	-- 			api_key_cmd = "echo none",
+	-- 		})
+	-- 	end,
+	-- 	requires = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 	},
+	-- })
+	use({ "Exafunction/codeium.nvim" })
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
