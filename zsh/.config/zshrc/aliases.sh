@@ -8,8 +8,9 @@ alias dk='docker'
 alias dkc='docker compose'
 alias vg='valgrind'
 
-# Game shortcuts
+# Windows game shortcuts
 alias dwarf-fortress='cd "/mnt/windows/Users/forse/Desktop/Dwarf Fortress"; wine "Dwarf Fortress.exe"'
+alias slay-the-spire='cd "/mnt/windows/Users/forse/Desktop/Slay the Spire v2.3.4"; wine "SlayTheSpire.exe"'
 
 # List directory aliases
 alias ll='exa'
@@ -42,6 +43,7 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 alias mm='cd ~/dev/bl-matchmaker/'
+alias win='cd /mnt/windows'
 alias mmbot='cd ~/dev/mmbot/'
 alias bt='deac;cd ~/dev/band-tracker/;activate'
 alias icalc='cd ~/dev/dataproc/'
