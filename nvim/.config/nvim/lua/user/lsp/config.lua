@@ -17,11 +17,11 @@ rt.setup({
 	},
 })
 
-lspconfig.tsserver.setup({
-	cmd = { "typescript-language-server", "--stdio" },
-	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-	root_dir = lspconfig.util.find_git_ancestor(),
-})
+-- lspconfig.tsserver.setup({
+-- 	cmd = { "typescript-language-server", "--stdio" },
+-- 	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+-- 	root_dir = lspconfig.util.find_git_ancestor(),
+-- })
 lspconfig.eslint.setup({
 	--- ...
 	on_attach = function(_, bufnr)
