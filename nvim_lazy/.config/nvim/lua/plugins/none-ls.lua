@@ -17,7 +17,7 @@ return {
 			-- 	extra_args = { "--max-line-length", "88", "--ignore", "E203, W503, ANN101" },
 			-- }),
 			null_ls.builtins.diagnostics.mypy,
-			null_ls.builtins.diagnostics.golangci_lint
+			-- null_ls.builtins.diagnostics.golangci_lint
 		},
 	})
     end,
